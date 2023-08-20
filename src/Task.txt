@@ -1,1 +1,4 @@
-aaa, aaaa, 2222-12-28, 3, aaaaaaaaaa,sla
+
+aaa,ronaldo,2005-12-28,1,categoria,todo
+aaa,ronaldo,2005-12-28,1,categoria,todo
+2,sla,2005-12-28,4,sla,todo

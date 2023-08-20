@@ -8,6 +8,18 @@ public class Task {
     private String categoria;
     private String status;
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", dataEntrega=" + dataEntrega +
+                ", prioridade=" + prioridade +
+                ", categoria='" + categoria + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
     public Task(String nome, String descricao, LocalDate dataEntrega, int prioridade, String categoria, String status) {
         this.nome = nome;
         this.descricao = descricao;

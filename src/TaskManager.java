@@ -1,6 +1,6 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskManager {
     private List<Task> tasks;
@@ -26,20 +26,30 @@ public class TaskManager {
     }
 
     public void saveTasksToFile(String filename) {
-        try (FileWriter writer = new FileWriter(filename)) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename, true))) {
             for (Task task : tasks) {
-                writer.write(task.getNome() + ", " +
-                        task.getDescricao() + ", " +
-                        task.getDataEntrega() + ", " +
-                        task.getPrioridade() + ", " +
+                writer.println(task.getNome() + "," +
+                        task.getDescricao() + "," +
+                        task.getDataEntrega() + "," +
+                        task.getPrioridade() + "," +
                         task.getCategoria() + "," +
-                        task.getStatus() + "\n");
+                        task.getStatus());
             }
             System.out.println("Tarefas salvas no arquivo " + filename);
         } catch (IOException e) {
             System.err.println("Erro ao salvar as tarefas no arquivo: " + e.getMessage());
         }
     }
+    public void searchTasksByCategory(String category) {
+        List<Task> tarefasFiltradas = tasks.stream()
+                .filter(task -> task.getCategoria().equals(category))
+                .collect(Collectors.toList());
+        System.out.println("Tarefas de:" + category);
+        for (Task task : tarefasFiltradas) {
+            System.out.println(task);
+        }
+    }
+
 
 
 }
