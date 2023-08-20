@@ -56,7 +56,10 @@ public class Application {
                     String category = scanner.next();
                     taskManager.searchTasksByCategory(category);
                     break;
-
+                case 3:
+                    System.out.println("Digite a prioridade");
+                    int priority = scanner.nextInt();
+                    taskManager.searchTasksByPriority(priority);
             }
         }while (escolha != 6);
 

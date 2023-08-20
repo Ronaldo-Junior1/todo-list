@@ -50,6 +50,15 @@ public class TaskManager {
         }
     }
 
+    public void searchTasksByPriority(int priority) {
+        List<Task> filteredTasks = tasks.stream()
+                .filter(task -> task.getPrioridade() == priority)
+                .collect(Collectors.toList());
+        System.out.println("Tarefas com Prioridade " + priority + ":");
+        for (Task task : filteredTasks) {
+            System.out.println(task);
+        }
+    }
 
 
 }
