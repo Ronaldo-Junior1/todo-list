@@ -10,6 +10,8 @@ public class Application {
         List<Task> tasksList = new ArrayList<>();
         TaskManager taskManager = new TaskManager(tasksList);
 
+        taskManager.loadTask();
+
 
 
         int escolha;
@@ -28,15 +30,14 @@ public class Application {
 
             switch (escolha) {
                 case 1:
+                    tasksList.clear();
                     scanner.nextLine();
                     System.out.print("Nome da tarefa: ");
                     String nome = scanner.nextLine();
-
                     System.out.print("Descrição: ");
                     String descricao = scanner.nextLine();
                     System.out.print("Data de término (dd/mm/aaaa): ");
                     String dueDate = scanner.nextLine();
-                    LocalDate dataEntrega = LocalDate.parse(dueDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                     System.out.print("Prioridade (1 a 5): ");
                     int prioridade = scanner.nextInt();
                     scanner.nextLine();
@@ -45,14 +46,15 @@ public class Application {
                     System.out.print("Status (todo, doing, done): ");
                     String status = scanner.nextLine();
 
-                    Task newTask = new Task(nome, descricao, dataEntrega, prioridade, categoria, status);
-                    taskManager.addTask(newTask);
+                    Task newTask = new Task(nome, descricao, dueDate, prioridade, categoria, status);
+                    tasksList.add(newTask);
                     taskManager.saveTasksToFile("src/Task.txt");
 
                     System.out.println("Tarefa adicionada com sucesso!");
                     break;
                 case 2:
                     System.out.print("Digite a categoria: ");
+                    System.out.println();
                     String category = scanner.next();
                     taskManager.searchTasksByCategory(category);
                     break;
@@ -60,8 +62,11 @@ public class Application {
                     System.out.println("Digite a prioridade");
                     int priority = scanner.nextInt();
                     taskManager.searchTasksByPriority(priority);
+                case 4:
+                    System.out.println("Digite o status");
+                    String statusSearch = scanner.next();
+                    taskManager.searchTasksByStatus(statusSearch);
             }
         }while (escolha != 6);
-
         }
     }

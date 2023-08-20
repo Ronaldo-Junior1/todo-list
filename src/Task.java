@@ -3,7 +3,7 @@ import java.time.LocalDate;
 public class Task {
     private String nome;
     private String descricao;
-    private LocalDate dataEntrega;
+    private String dataEntrega;
     private int prioridade;
     private String categoria;
     private String status;
@@ -20,7 +20,7 @@ public class Task {
                 '}';
     }
 
-    public Task(String nome, String descricao, LocalDate dataEntrega, int prioridade, String categoria, String status) {
+    public Task(String nome, String descricao, String dataEntrega, int prioridade, String categoria, String status) {
         this.nome = nome;
         this.descricao = descricao;
         this.dataEntrega = dataEntrega;
@@ -45,11 +45,11 @@ public class Task {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataEntrega() {
+    public String getDataEntrega() {
         return dataEntrega;
     }
 
-    public void setDataEntrega(LocalDate dataEntrega) {
+    public void setDataEntrega(String dataEntrega) {
         this.dataEntrega = dataEntrega;
     }
 
