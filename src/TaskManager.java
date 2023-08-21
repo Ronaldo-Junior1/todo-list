@@ -1,4 +1,7 @@
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -11,21 +14,60 @@ public class TaskManager {
         this.tasks = tasks;
     }
 
-//    public void addTask(Task task) {
-//        if (tasks.isEmpty()) {
-//            tasks.add(task);
-//        } else {
-//            int insertIndex = 0;
-//            for (int i = 0; i < tasks.size(); i++) {
-//                if (task.getPrioridade() > tasks.get(i).getPrioridade()) {
-//                    insertIndex = i + 1;
-//                } else {
-//                    break;
-//                }
-//            }
-//            tasks.add(insertIndex, task);
-//        }
-//    }
+    public void addTask(List<Task> tasks) {
+        tasks.clear();
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nome da tarefa: ");
+        String nome = scanner.nextLine();
+        System.out.print("Descrição: ");
+        String descricao = scanner.nextLine();
+        String dueDateInput = "";
+        Date dueDate = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        while (dueDate == null) {
+            System.out.print("Data de entrega (dd/mm/aaaa): ");
+            dueDateInput = scanner.nextLine();
+            try {
+                dateFormat.setLenient(false);
+                dueDate = dateFormat.parse(dueDateInput);
+            } catch (ParseException e) {
+                System.out.println("Formato de data inválido. Utilize o formato dd/mm/aaaa.");
+            }
+        }
+        int prioridade = 0;
+        while (prioridade < 1 || prioridade > 5) {
+            System.out.print("Prioridade (1 a 5): ");
+            try {
+                prioridade = Integer.parseInt(scanner.nextLine());
+                if (prioridade < 1 || prioridade > 5) {
+                    System.out.println("Prioridade deve estar entre 1 e 5.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, insira um número válido.");
+            }
+        }
+
+        System.out.print("Categoria: ");
+        String categoria = scanner.nextLine();
+        String status = "";
+        while (!status.equalsIgnoreCase("todo") && !status.equalsIgnoreCase("doing") && !status.equalsIgnoreCase("done")) {
+            System.out.print("Status (todo, doing, done): ");
+            status = scanner.nextLine().toLowerCase();
+            if (!status.equalsIgnoreCase("todo") && !status.equalsIgnoreCase("doing") && !status.equalsIgnoreCase("done")) {
+                System.out.println("Status inválido. Insira um dos valores permitidos: todo, doing, done.");
+            }
+        }
+
+        Task newTask = new Task(nome, descricao, dueDateInput, prioridade, categoria, status);
+        tasks.add(newTask);
+        saveTasksToFile("src/Task.txt");
+
+        System.out.println("Tarefa adicionada com sucesso!");
+    }
+
 
     public void listAllTasks() {
         System.out.println("Lista de todas as tarefas:");

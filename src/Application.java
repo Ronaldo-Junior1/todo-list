@@ -29,27 +29,7 @@ public class Application {
 
             switch (escolha) {
                 case 1:
-                    tasksList.clear();
-                    scanner.nextLine();
-                    System.out.print("Nome da tarefa: ");
-                    String nome = scanner.nextLine();
-                    System.out.print("Descrição: ");
-                    String descricao = scanner.nextLine();
-                    System.out.print("Data de término (dd/mm/aaaa): ");
-                    String dueDate = scanner.nextLine();
-                    System.out.print("Prioridade (1 a 5): ");
-                    int prioridade = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.print("Categoria: ");
-                    String categoria = scanner.nextLine();
-                    System.out.print("Status (todo, doing, done): ");
-                    String status = scanner.nextLine();
-
-                    Task newTask = new Task(nome, descricao, dueDate, prioridade, categoria, status);
-                    tasksList.add(newTask);
-                    taskManager.saveTasksToFile("src/Task.txt");
-
-                    System.out.println("Tarefa adicionada com sucesso!");
+                    taskManager.addTask(tasksList);
                     break;
                 case 2:
                     taskManager.listAllTasks();
@@ -75,6 +55,6 @@ public class Application {
                    taskManager.overwriteFile("src/Task.txt");
             }
         }while (escolha != 7);
-
+        taskManager.loadTask();
         }
     }
