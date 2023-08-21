@@ -1,22 +1,4 @@
-aaaaa,aaaaaa,aaaaa,22,aaaa,aaaa
+aaa,aaaa,aaaa,3,aaaaa,aaaa
 
-qqq,11,11,11,1,1
-
-111,111,1,11,1,1
-
-aaa,1,1,1,1,1
-
-aaa,aaa,333,2,aaaa,33
-
-aaa,aaaa,222,22,1,sla
-
-teste 1,teste,teste,2,teste,teste
-
-teste2,teste,ssss,2,aaaa,todo
-
-aaa,aaaa,aaaa,22,22,2
-
-testeee,teste,11,11,11,1
-
-11,1111,1111,11,11,1
+aaaaaaaa,222,22,222,222,22
 
