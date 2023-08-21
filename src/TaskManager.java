@@ -1,9 +1,7 @@
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TaskManager {
@@ -69,8 +67,19 @@ public class TaskManager {
         System.out.println("Tarefa adicionada com sucesso!");
     }
 
+    public void listAllTasksByPriority() {
+        System.out.println("Lista de todas as tarefas em ordem de prioridade:");
 
-    public void listAllTasks() {
+        List<Task> sortedTasks = new ArrayList<>(tasks);
+        sortedTasks.sort(Comparator.comparingInt(Task::getPrioridade).reversed());
+
+        for (int i = 0; i < sortedTasks.size(); i++) {
+            Task task = sortedTasks.get(i);
+            System.out.println(task);
+        }
+    }
+
+    public void listAllTasksById() {
         System.out.println("Lista de todas as tarefas:");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -125,7 +134,6 @@ public class TaskManager {
 
     public void searchTasksByCategory() {
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Digite a categoria (ou 0 para voltar ao menu): ");
         String category = scanner.nextLine();
 
@@ -204,7 +212,7 @@ public class TaskManager {
         if (!tasks.isEmpty()) {
             do {
                 System.out.println("Que tarefa deseja excluir ? Digite 0 para cancelar");
-                listAllTasks();
+                listAllTasksById();
                 if (scanner.hasNextInt()) {
                     int opcao = scanner.nextInt();
                     scanner.nextLine();

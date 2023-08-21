@@ -32,7 +32,7 @@ public class Application {
                 case 2:
                     tasksList.clear();
                     taskManager.loadTask();
-                    taskManager.listAllTasks();
+                    taskManager.listAllTasksByPriority();
                     break;
                 case 3:
                     tasksList.clear();
