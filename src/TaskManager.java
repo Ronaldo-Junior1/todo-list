@@ -48,6 +48,7 @@ public class TaskManager {
             } catch (NumberFormatException e) {
                 System.out.println("Por favor, insira um número válido.");
             }
+
         }
 
         System.out.print("Categoria: ");
@@ -71,8 +72,9 @@ public class TaskManager {
 
     public void listAllTasks() {
         System.out.println("Lista de todas as tarefas:");
-        for (Task task : tasks) {
-            System.out.println(task);
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            System.out.println("Índice: " + (i + 1) + " "+ task);
         }
     }
 
@@ -121,39 +123,82 @@ public class TaskManager {
         }
     }
 
-    public void searchTasksByCategory(String category) {
-        List<Task> tarefasFiltradas = tasks.stream()
-                .filter(task -> task.getCategoria().equals(category))
+    public void searchTasksByCategory() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite a categoria (ou 0 para voltar ao menu): ");
+        String category = scanner.nextLine();
+
+        if (category.equals("0")) {
+            return;
+        }
+
+        List<Task> filteredTasks = tasks.stream()
+                .filter(task -> task.getCategoria().equalsIgnoreCase(category))
                 .collect(Collectors.toList());
-        System.out.println("Tarefas de:" + category);
-        for (Task task : tarefasFiltradas) {
-            System.out.println(task);
+
+        if (filteredTasks.isEmpty()) {
+            System.out.println("Nenhuma tarefa encontrada na categoria: " + category);
+        } else {
+            System.out.println("Tarefas da categoria " + category + ":");
+            for (Task task : filteredTasks) {
+                System.out.println(task);
+            }
         }
     }
 
-    public void searchTasksByPriority(int priority) {
+    public void searchTasksByPriority() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite a prioridade (ou 0 para voltar ao menu): ");
+        int priority = scanner.nextInt();
+
+        if (priority == 0) {
+            return;
+        }
+
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getPrioridade() == priority)
                 .collect(Collectors.toList());
-        System.out.println("Tarefas com Prioridade " + priority + ":");
-        for (Task task : filteredTasks) {
-            System.out.println(task);
+
+        if (filteredTasks.isEmpty()) {
+            System.out.println("Nenhuma tarefa encontrada com prioridade: " + priority);
+        } else {
+            System.out.println("Tarefas com Prioridade " + priority + ":");
+            for (Task task : filteredTasks) {
+                System.out.println(task);
+            }
         }
     }
 
-    public void searchTasksByStatus(String status) {
+
+    public void searchTasksByStatus() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite o status: todo, doing ou done (ou 0 para voltar ao menu): ");
+        String status = scanner.next().toLowerCase();
+
+        if (status.equals("0")) {
+            return;
+        }
+
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getStatus().equalsIgnoreCase(status))
                 .collect(Collectors.toList());
-        System.out.println("Tarefas com Status " + status + ":");
-        for (Task task : filteredTasks) {
-            System.out.println(task);
+
+        if (filteredTasks.isEmpty()) {
+            System.out.println("Nenhuma tarefa encontrada com status: " + status);
+        } else {
+            System.out.println("Tarefas com Status " + status + ":");
+            for (Task task : filteredTasks) {
+                System.out.println(task);
+            }
         }
     }
 
 
-    public void deleteTask() {
 
+    public void deleteTask() {
         boolean error = true;
 
         if (!tasks.isEmpty()) {

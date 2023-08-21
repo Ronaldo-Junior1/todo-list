@@ -12,8 +12,6 @@ public class Application {
 
         taskManager.loadTask();
 
-
-
         int escolha;
         do {
             System.out.println("Menu:");
@@ -32,23 +30,24 @@ public class Application {
                     taskManager.addTask(tasksList);
                     break;
                 case 2:
+                    tasksList.clear();
+                    taskManager.loadTask();
                     taskManager.listAllTasks();
                     break;
                 case 3:
-                    System.out.print("Digite a categoria: ");
-                    System.out.println();
-                    String category = scanner.next();
-                    taskManager.searchTasksByCategory(category);
+                    tasksList.clear();
+                    taskManager.loadTask();
+                    taskManager.searchTasksByCategory();
                     break;
                 case 4:
-                    System.out.println("Digite a prioridade");
-                    int priority = scanner.nextInt();
-                    taskManager.searchTasksByPriority(priority);
+                    tasksList.clear();
+                    taskManager.loadTask();
+                    taskManager.searchTasksByPriority();
                     break;
                 case 5:
-                    System.out.println("Digite o status");
-                    String statusSearch = scanner.next();
-                    taskManager.searchTasksByStatus(statusSearch);
+                    tasksList.clear();
+                    taskManager.loadTask();
+                    taskManager.searchTasksByStatus();
                     break;
                 case 6:
                    taskManager.deleteTask();
