@@ -14,10 +14,15 @@
         <form id="todo-form">
             <input type="text" id="name" placeholder="Nome da Tarefa" required>
             <input type="text" id="description" placeholder="Descrição" required>
-            <input type="text" id="due-date" placeholder="Data de Entrega" required>
-            <input type="text" id="priority" placeholder="Prioridade" required>
+            <input type="date" id="due-date" placeholder="Data de Entrega" min="dataminima"required>
+            <input type="number" id="priority" placeholder="Prioridade" min="1" max="5" required>
             <input type="text" id="category" placeholder="Categoria" required>
-            <input type="text" id="status" placeholder="Status" required>
+          <select id="status" required>
+              <option value="">Escolha um Status</option>
+              <option value="todo">Todo</option>
+              <option value="doing">Doing</option>
+              <option value="done">Done</option>
+          </select>
             <button type="submit">Adicionar</button>
         </form>
 

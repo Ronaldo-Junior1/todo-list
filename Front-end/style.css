@@ -38,6 +38,21 @@
     outline: none;
   }
 
+  #todo-form select {
+    padding: 12px;
+    margin-right: 12px;
+    width: 225px;
+  
+    border-radius: 4px;
+    border: none;
+  
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+    background: white;
+  
+    font-size: 14px;
+    outline: none;
+  }
+
   #todo-form button {
     padding: 12px 32px;
   
@@ -107,7 +122,7 @@
     color: white;
   }
 
-  .delete-button{
+  .delete-button,.edit-button{
     padding: 2px;
     border-radius: 4px;
     border: none;
@@ -115,4 +130,8 @@
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
     background: #f74646;
     color: black;
+  }
+  
+  .edit-button{
+    background: #85b5dd;
   }

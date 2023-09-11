@@ -31,6 +31,18 @@ form.addEventListener("submit", function (e) {
     const category = document.getElementById("category").value;
     const status = document.getElementById("status").value;
 
+    const formattedDueDate = formatarData(dueDate);
+
+
+    function formatarData(data) {
+      const parte = data.split("-");
+      const ano = parte[0];
+      const mes = parte[1];
+      const dia = parte[2];
+      return `${dia}/${mes}/${ano}`;
+  }
+
+    
     if (tarefaEditando) {
         tarefaEditando.querySelector(".task-name").textContent = name;
 
@@ -38,7 +50,7 @@ form.addEventListener("submit", function (e) {
         taskDetails.innerHTML = `
             <p>Nome: ${name}</p>
             <p>Descrição: ${description}</p>
-            <p>Data de Entrega: ${dueDate}</p>
+            <p>Data de Entrega: ${formattedDueDate}</p>
             <p>Prioridade: ${priority}</p>
             <p>Categoria: ${category}</p>
             <p>Status: ${status}</p>
@@ -66,9 +78,11 @@ form.addEventListener("submit", function (e) {
         taskDeleteButton.classList.add("delete-button");
         taskDeleteButton.textContent = "Excluir";
         taskDeleteButton.addEventListener("click", function () {
-            task.remove();
+            const confirmar = confirm("Tem certeza de que deseja apagar esta tarefa?");
+            if (confirmar) {
+                task.remove();
+            }
         });
-
         const taskEditButton = document.createElement("button");
         taskEditButton.classList.add("edit-button");
         taskEditButton.textContent = "Editar";
@@ -79,12 +93,13 @@ form.addEventListener("submit", function (e) {
             document.querySelector("#todo-form button").textContent = "Salvar";
         });
 
+       
         const taskDetails = document.createElement("div");
         taskDetails.classList.add("task-details");
         taskDetails.innerHTML = `
             <p>Nome: ${name}</p>
             <p>Descrição: ${description}</p>
-            <p>Data de Entrega: ${dueDate}</p>
+            <p>Data de Entrega: ${formattedDueDate}</p>
             <p>Prioridade: ${priority}</p>
             <p>Categoria: ${category}</p>
             <p>Status: ${status}</p>
@@ -112,7 +127,7 @@ form.addEventListener("submit", function (e) {
         task.appendChild(taskEditButton);
         task.appendChild(taskDetails);
 
-        const todoLane = document.getElementById("todo-lane");
+        const todoLane = document.getElementById(`${status}-lane`);
         todoLane.appendChild(task);
 
         form.reset();
@@ -162,3 +177,11 @@ const insertAboveTask = (zone, mouseY) => {
 
     return closestTask;
 };
+
+const hoje = new Date();
+const dd = String(hoje.getDate()).padStart(2, '0');
+const mm = String(hoje.getMonth() + 1).padStart(2, '0');
+const yyyy = hoje.getFullYear();
+
+const dataMinima = `${yyyy}-${mm}-${dd}`;
+document.getElementById("due-date").setAttribute("min", dataMinima);
