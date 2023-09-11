@@ -2,5 +2,9 @@
 
 ## Project Made By Ronaldo Junior
 --- 
+### Esse projeto é um organizador de tarefa conhecido como todo-list
 
-### Projeto desenvolvido em java em que simula o famoso sistema de organização TODO List 
+
+### Projeto Back-end desenvolvido em java
+### Projeto Front-end desenvolvido em HTML,CSS e JavaScript
+
